@@ -1,0 +1,9 @@
+{
+   "tabWidth": 3,
+   "useTabs": false,
+   "trailingComma": "none",
+   "defaultParentheses": "avoid",
+   "arrowParens": "avoid",
+   "printWidth": 120,
+   "singleQuote": true
+}
