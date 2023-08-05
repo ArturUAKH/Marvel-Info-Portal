@@ -1,19 +1,16 @@
 import { Component } from 'react';
 import MarvelService from '../../services/MarvelService';
 import Spinner from '../spinner/spinner';
+import ErrorMessage from '../errorMessage/ErrorMessage';
 import mjolnir from '../../resources/img/mjolnir.png';
 
 import './randomChar.scss';
 
 class RandomChar extends Component {
-    constructor(props) {
-        super(props);
-        this.updateChar();
-    }
-
     state = {
         char: {},
-        loading: true
+        loading: true,
+        error: false
     };
 
     marvelService = new MarvelService();
@@ -23,17 +20,35 @@ class RandomChar extends Component {
     };
     //prettier-ignore
     updateChar = () => {
-        const id = Math.floor(Math.random() * (1011400 - 1011100) + 1011100);
+        const id = Math.floor(Math.random() * (1011400 - 1010900) + 1010900);
         this.marvelService.getCharacter(id)
-        .then(this.onCharLoaded);
+        .then(this.onCharLoaded)
+        .catch(this.onError);
     };
 
+    onError = () => {
+        this.setState({ loading: false, error: true });
+    };
+
+    componentDidMount() {
+        this.updateChar();
+        this.randomCharTimerId = setInterval(this.updateChar, 2000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.randomCharTimerId);
+    }
+
     render() {
-        const { char, loading } = this.state;
+        const { char, loading, error } = this.state;
+
+        const errorMessage = error ? <ErrorMessage /> : null;
+        const spiner = loading ? <Spinner /> : null;
+        const content = spiner || errorMessage || <View char={char} />;
 
         return (
             <div className="randomchar">
-                {loading ? <Spinner /> : <View char={char} />}
+                {content}
                 <div className="randomchar__static">
                     <p className="randomchar__title">
                         Random character for today!
