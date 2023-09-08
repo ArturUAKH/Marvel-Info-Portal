@@ -25,7 +25,7 @@ class RandomChar extends Component {
     //prettier-ignore
     updateChar = () => {
         this.onCharloading();
-        const id = Math.floor(Math.random() * (1011400 - 1010900) + 1010900);
+        const id = Math.floor(Math.random() * (1011200 - 1011000) + 1011000);
         this.marvelService.getCharacter(id)
         .then(this.onCharLoaded)
         .catch(this.onError);
@@ -37,7 +37,6 @@ class RandomChar extends Component {
 
     componentDidMount() {
         this.updateChar();
-        // this.randomCharTimerId = setInterval(this.updateChar, 2000);
     }
 
     componentWillUnmount() {
@@ -61,10 +60,17 @@ class RandomChar extends Component {
                         Do you want to get to know him better?
                     </p>
                     <p className="randomchar__title">Or choose another one</p>
-                    <button className="button button__main" onClick={this.updateChar}>
+                    <button
+                        className="button button__main"
+                        onClick={this.updateChar}
+                    >
                         <div className="inner">try it</div>
                     </button>
-                    <img src={mjolnir} alt="mjolnir" className="randomchar__decoration" />
+                    <img
+                        src={mjolnir}
+                        alt="mjolnir"
+                        className="randomchar__decoration"
+                    />
                 </div>
             </div>
         );
@@ -75,13 +81,21 @@ const View = ({ char }) => {
     const { name, description, thumbnail, homePage, wiki } = char;
 
     let imgStyle = { objectFit: 'cover' };
-    if (thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
+    if (
+        thumbnail ===
+        'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg'
+    ) {
         imgStyle = { objectFit: 'contain' };
     }
 
     return (
         <div className="randomchar__block">
-            <img src={thumbnail} alt="Random character" className="randomchar__img" style={imgStyle} />
+            <img
+                src={thumbnail}
+                alt="Random character"
+                className="randomchar__img"
+                style={imgStyle}
+            />
             <div className="randomchar__info">
                 <p className="randomchar__name">{name}</p>
                 <p className="randomchar__descr">{description}</p>
