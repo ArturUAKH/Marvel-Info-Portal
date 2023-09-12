@@ -3,6 +3,7 @@ import AppHeader from '../appHeader/AppHeader';
 import RandomChar from '../randomChar/RandomChar';
 import CharList from '../charList/CharList';
 import CharInfo from '../charInfo/CharInfo';
+import Banner from '../banner/Banner';
 
 import decoration from '../../resources/img/vision.png';
 
@@ -21,6 +22,7 @@ class App extends Component {
         return (
             <div className="app">
                 <AppHeader />
+                <Banner />
                 <main>
                     <RandomChar />
                     <div className="char__content">

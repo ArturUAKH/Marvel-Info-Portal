@@ -1,0 +1,11 @@
+.banner {
+    &__heroes {
+        height: 270px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        img {
+            width: 50%;
+        }
+    }
+}
