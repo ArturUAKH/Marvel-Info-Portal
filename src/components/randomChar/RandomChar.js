@@ -39,10 +39,6 @@ class RandomChar extends Component {
         this.updateChar();
     }
 
-    componentWillUnmount() {
-        // clearInterval(this.randomCharTimerId);
-    }
-
     render() {
         const { char, loading, error } = this.state;
 
